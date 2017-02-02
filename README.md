@@ -1,2 +1,2 @@
-# gm-cor-tutor1
-Game Maker - Corons sdk Tutorial 1 (Hello world)
+# gm-cor-tutor2
+Game Maker - Corona sdk Tutorial 2 (переменные, функции)
