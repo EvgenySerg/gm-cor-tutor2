@@ -4,43 +4,76 @@
 --
 -----------------------------------------------------------------------------------------
 
--- Your code here
--- Печатаем в консоли
-print( "Hello World!" ..5)
+-- Строковые переменные
 
-local physics = require( "physics" )
-physics.start()
+local widget = require("widget")
+local  firstName = "Albert"
+local lastName = "Einstein"
+local fullName = firstName.." "..lastName
+print(fullName)
 
-local sky = display.newImage( "bkg_clouds.png" )
-sky.x = 160; sky.y = 195
- 
-local ground = display.newImage( "ground.png" )
-ground.x = 160; ground.y = 510
+local yearBorn = 1879
+local yearDied = 1955
+local age = yearDied - yearBorn
+print(fullName.." умер в возрасте "..age.." лет.")
 
-physics.addBody( ground, "static", { friction=0.5, bounce=0.3 } )
-
-cratesGroup=display.newGroup( )
-crates={}
-
-for a=1,10,1 do
-crates[a] = display.newImage("crate.png")	
-crates[a].x=30*a+display.contentCenterX
-crates[a].y=50*a
-physics.addBody( crates[a], { density=3.0, friction=0.5, bounce=0.3 } )
+-- Scopes, Functions
+local function addValues()
+	local x=4
+	local y=6
+	local sum= x+y
+	print("Cумма "..x.." + "..y.." = "..sum)
 end
 
+addValues()
 
---text
-local myTextObject = display.newText( "Hello Game!", display.contentCenterX, 0, "Arial", 60 )
-myTextObject:setFillColor( 1,0,0 )
 
-function screenTap()
-    local r = math.random( 0, 255 )
-    local g = math.random( 0, 100 )
-    local b = math.random( 0, 100 )
-    myTextObject:setFillColor( r/255, g/100, b/100 )
+-- расчет площади круга
+local function CirleSquare(radius)
+	s=math.pi*radius*radius
+	return s
 end
 
-display.currentStage:addEventListener( "tap", screenTap )
+local r=10
+local s=CirleSquare(r)
+print("Площадь круга с радиусом "..r.." = "..s)
+--------------------------------------------------------------------
 
---physics.addBody( crate1, { density=3.0, friction=0.5, bounce=0.3 } )
+local myText=display.newText( "-", display.contentCenterX, 50, "Arial", 30 )
+myText:setFillColor( 1,0,0 )
+
+
+local function  handleButtonEvent( event )
+	local phase=event.phase
+	if "ended" then
+		s=CirleSquare(10)
+		myText.text=s.."см2"
+	end
+	-- body
+end
+
+local myButton=widget.newButton
+{
+	
+	top=200,
+	width=300,
+	height=100,
+	left=100,
+	defaultFile="button.png",
+	overFile="buttonOver.png",
+	label="Площадь круга радиусом 10см",
+	onEvent=handleButtonEvent,
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
